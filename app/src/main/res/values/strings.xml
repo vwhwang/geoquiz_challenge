@@ -5,4 +5,9 @@
     <string name="false_button">false</string>
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">WRONG!</string>
+    <string name="questionOne">1+1=2</string>
+    <string name="questionTwo">1+1=4</string>
+    <string name="questionThree">0+0=0</string>
+    <string name="next_question">Next question!</string>
+    <string name="previous_question">Previous Question</string>
 </resources>
