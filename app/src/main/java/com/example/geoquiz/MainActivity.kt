@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         Questions(R.string.questionThree, true)
     )
     private var currentIndex = 0
+    private val totalScore = questionBank.size
+    private var userScore = 0
+    private var hasAnswered = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
             showQuestion()
+            hasAnswered = false
         }
         binding.previousButton.setOnClickListener {
             if (currentIndex == 0) {
@@ -54,12 +58,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkAnswer(view: View, userInput:Boolean){
-        val correctAnswer = questionBank[currentIndex].answer
-        val messageResId = if (userInput == correctAnswer) {
-            R.string.correct_toast
+        if (hasAnswered) {
+            Toast.makeText(this, R.string.user_answered_already, Toast.LENGTH_SHORT).show()
         } else {
-            R.string.incorrect_toast
+            val correctAnswer = questionBank[currentIndex].answer
+            val messageResId = if (userInput == correctAnswer) {
+                R.string.correct_toast
+            } else {
+                R.string.incorrect_toast
+            }
+            if (userInput == correctAnswer) userScore += 1
+            Snackbar.make(view, messageResId, Snackbar.LENGTH_SHORT).show()
+            hasAnswered = true
         }
-        Snackbar.make(view, messageResId, Snackbar.LENGTH_SHORT).show()
+        //reached last question
+        if (currentIndex == (questionBank.size - 1)) {
+            val scores = userScore/totalScore * 100
+            Toast.makeText(this, "$scores", Toast.LENGTH_LONG).show()
+            userScore = 0
+        }
     }
 }
