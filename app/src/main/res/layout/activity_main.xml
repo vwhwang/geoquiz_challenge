@@ -48,5 +48,10 @@
             android:text="@string/next_question" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/api_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

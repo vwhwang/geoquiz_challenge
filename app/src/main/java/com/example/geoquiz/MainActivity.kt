@@ -1,5 +1,6 @@
 package com.example.geoquiz
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
         binding.falseButton.setOnClickListener { view ->
             checkAnswer(view, false)
         }
+        val apiChar = "API Level is ${Build.VERSION.SDK_INT}"
+        binding.apiTitle.setText(apiChar)
     }
 
     private fun showQuestion() {
